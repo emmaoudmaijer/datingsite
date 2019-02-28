@@ -1,0 +1,23 @@
+{
+  "name": "datingsite",
+  "version": "1.0.0",
+  "description": "my dating app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmaoudmaijer/datingsite.git"
+  },
+  "keywords": [
+    "dating",
+    "app"
+  ],
+  "author": "emma oudmaijer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emmaoudmaijer/datingsite/issues"
+  },
+  "homepage": "https://github.com/emmaoudmaijer/datingsite#readme"
+}
