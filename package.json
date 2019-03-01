@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/emmaoudmaijer/datingsite/issues"
   },
-  "homepage": "https://github.com/emmaoudmaijer/datingsite#readme"
+  "homepage": "https://github.com/emmaoudmaijer/datingsite#readme",
+  "dependencies": {
+    "camelcase": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
 }
