@@ -26,4 +26,4 @@ npm run start
 
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/emmaoudmaijer/datingsite/blob/master/LICENSE)
