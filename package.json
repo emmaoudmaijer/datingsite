@@ -21,12 +21,18 @@
   },
   "homepage": "https://github.com/emmaoudmaijer/datingsite#readme",
   "dependencies": {
+<<<<<<< HEAD
     "camelcase": "^5.0.0",
     "express": "^4.16.4",
     "pug": "^2.0.3"
   },
   "devDependencies": {
     "eslint": "^5.15.1",
+=======
+    "camelcase": "^5.0.0"
+  },
+  "devDependencies": {
+>>>>>>> bb9fba2f4b49b7768ba7ff0f6c5ee832939b8314
     "nodemon": "^1.18.10"
   }
 }
