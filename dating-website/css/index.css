@@ -1,0 +1,79 @@
+form fieldset {
+    background-color: white;
+    margin-top: 1em;
+    padding: 1.3em 2em;
+}
+
+fieldset {
+    display: block;
+    margin-right: 2px;
+    margin-left: 2px;
+    padding: 0.35em 0.75em 0.75em 0.625em;
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+}
+
+form {
+    font-size: 1.5em;
+    padding: 3em;
+    display: block;
+    margin-top: 0em;
+}
+
+legend {
+    width:96%;
+    margin-bottom:2%;
+    padding-left:2%;
+    padding-right:5px;
+    background-color:#666666;
+    font-size:10px;
+    color:#FFFFFF;
+}
+
+label {
+    width:80%;
+    margin-top:15px;
+    float:left;
+   
+        
+}
+input {
+    width:50%;
+    margin-top:5px;
+  margin-left: 3em;
+}
+
+input type:[checkbox]{
+    width:40%;
+    margin-top:0px;
+  margin-left: 3em;
+}
+
+
+div.titelhomepagina {
+    width: 100%;
+    height: 40em;
+    background-image: url(/images/pepper.jpg);
+    background-size: cover;
+    margin-bottom: 1em;
+    padding-top: 2em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-bottom: 80px solid pink;
+}
+div {
+    display: block;
+    background-color: lightpink;
+    background-image: url(http://127.0.0.1:61618/images/pepper.jpg);
+    background-size: cover;
+    border-bottom-color: rgb(255, 192, 203) solid 80px;
+    display: block;
+    font-family: sans-serif;
+    font-size: 16px;
+    height: 640px;
+    margin-bottom: 16px;
+    padding-top: 32px;
+    width: 964px;
+}
