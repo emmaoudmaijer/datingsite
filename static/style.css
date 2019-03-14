@@ -1,7 +1,44 @@
 body{
     background-color: darkred;
+    color: white;
 }
 
 h1{
     color: white;
 }
+
+img {
+    max-width: 100%;
+    max-height: 15em;
+}
+
+input {
+width: 100%;
+padding: 8px;
+width: 25%;
+border: 1px solid #ccc;
+border-radius: 2px;
+margin-left: 20px;
+}
+
+input[type=text], select, textarea{
+    box-sizing: border-box;
+    resize: vertical;
+  }
+  
+  
+  label {
+    padding: 15px 20px 20px 0;
+    display: inline-block;
+  }
+  
+  
+  button[type=submit] {
+    background-color:rgb(8, 37, 167);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+  }

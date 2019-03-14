@@ -1,0 +1,22 @@
+html
+ head
+    title='Formulier'
+style
+     include ../static/style.css
+body
+ h1= 'Registreren'
+ <enctype=multipart/form-data>
+
+<form action=/ method=post>
+fieldset
+     label(for='name') Naam: 
+     <input name=name type=text accept=text/> <br>
+     label(for='email') Email: 
+     <input name=email type=email accept=email/><br>
+     label(for='password') Wachtwoord: 
+     <input name=password type=password accept=password/><br>
+     label(for='password2') Herhaal wachtwoord:
+     <input name=password2 type=password accept=password/><br>
+     label(for='image') Voeg een profielfoto toe:
+     <input name=profielfoto type=file accept=image/><br>
+     button.btn.btn-primary(type='submit') Registreren

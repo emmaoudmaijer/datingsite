@@ -33,22 +33,21 @@ legend {
 }
 
 label {
-    width:80%;
+    width:60%;
     margin-top:15px;
     float:left;
    
         
 }
-input {
-    width:50%;
+input [type=text,email] {
+    width:55%;
     margin-top:5px;
   margin-left: 3em;
 }
 
-input type:[checkbox]{
-    width:40%;
-    margin-top:0px;
+input [type=checkbox] {
   margin-left: 3em;
+  width: 10%;
 }
 
 

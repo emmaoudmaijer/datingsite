@@ -1,18 +1,52 @@
 var camelcase = require('camelcase');
 
-console.log(camelcase('hello-world'));
+var multer = require('multer');
+var upload = multer({dest: 'static/upload/'});
 
-var nodemon = require('nodemon');
+var slug = require('slug');
+var bodyParser = require('body-parser');
 
-console.log(nodemon('hello-world'));
 
 //--------------- express
 
-var express = require('express')
+var express = require('express');
 
 var app = express();
 
 var port = 8000;
+
+var data = [
+     {
+        name: 'Emma Oudmaijer',
+        email: 'Emmaoudmaijer@hva.nl'
+     },
+     {
+        name: 'Youp Schaefers',
+        email: 'youpschaefers@gmail.com'
+     }
+]
+app
+.post('/', upload.single('cover'), add)
+.use(bodyParser.urlencoded({extended: true}))
+.post('/', add)
+.delete('id = req.params.id')
+
+function add(req, res){
+        Data.push({
+                cover: req.file.filename = null,
+        })
+       
+}
+
+
+function remove(req, res) {
+        var id = req.params.id
+
+        data = data.filter(function (value){
+                return value.id !== id
+        })
+        res.json({status: 'ok'})
+}
 
 app.set('view engine', 'pug');
 app.use(express.static('/static'));
@@ -22,6 +56,11 @@ app.use(express.static('/static'));
 app.get('/', homepage)
 function homepage(req, res) {
         res.render('index.pug');
+}
+
+app.get('/aanmelden', aanmelden)
+function aanmelden(req, res) {
+        res.render('aanmelden.pug');
 }
 
 
@@ -46,4 +85,3 @@ app.use(function(req, res, next){
 
 app.listen(port);
 
-//app.set('view engine', 'pug');
