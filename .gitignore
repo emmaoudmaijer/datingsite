@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 # Ignore folder named 'node_modules' node_modules/
+=======
+# Ignore node_modules
+node_modules
+
+#Ignore .DS_store
+.DS_Store
+>>>>>>> 78e3e12b1fc579696bfa41dc8c679243ec210ded
