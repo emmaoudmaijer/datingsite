@@ -18,13 +18,16 @@ var port = 8000;
 var data = [
      {
         name: 'Emma Oudmaijer',
-        email: 'Emmaoudmaijer@hva.nl'
+        email: 'Emmaoudmaijer@hva.nl',
+        password: 'emma'
      },
      {
         name: 'Youp Schaefers',
-        email: 'youpschaefers@gmail.com'
+        email: 'youpschaefers@gmail.com',
+        password: 'youp'
      }
 ]
+
 app
 .post('/', upload.single('cover'), add)
 .use(bodyParser.urlencoded({extended: true}))
@@ -32,10 +35,13 @@ app
 .delete('id = req.params.id')
 
 function add(req, res){
+        var id = slug(req.body.title).toLowerCase()
         data.push({
+                name: name,
+                email: req.body.email,
                 cover: req.file ? req.filename : null,
         })
-       
+       res.redirect('/' + id)
 }
 
 
@@ -63,6 +69,10 @@ function aanmelden(req, res) {
         res.render('aanmelden.pug');
 }
 
+app.get('/account', account)
+function aanmelden(req, res) {
+        res.render('account.pug', {data:account});
+}
 
 //-------------------- Route naar aboutme -------------------------
 app.get('/aboutme', aboutpage)
