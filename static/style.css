@@ -1,3 +1,5 @@
+* { box-sizing: border-box }
+
 body{
     background-color: darkred;
     color: white;
@@ -12,6 +14,10 @@ img {
     max-height: 15em;
 }
 
+form {
+    text-align: center;
+}
+
 input {
 width: 100%;
 padding: 8px;
@@ -19,20 +25,20 @@ width: 25%;
 border: 1px solid #ccc;
 border-radius: 2px;
 margin-left: 20px;
+margin-top: 2em;
+margin-bottom: 2em;
 }
 
 input[type=text], select, textarea{
     box-sizing: border-box;
     resize: vertical;
   }
-  
+ input, textarea { width: 50% } 
   
   label {
-    padding: 15px 20px 20px 0;
-    display: inline-block;
+    text-align: left:
   }
-  
-  
+
   button[type=submit] {
     background-color:rgb(8, 37, 167);
     color: white;
