@@ -17,25 +17,39 @@ var port = 8000;
 
 var data = [
      {
+        id: 1,
         name: 'Emma Oudmaijer',
         email: 'Emmaoudmaijer@hva.nl'
      },
      {
+        id: 2,
         name: 'Youp Schaefers',
         email: 'youpschaefers@gmail.com'
      }
 ]
-app
-.post('/', upload.single('cover'), add)
-.use(bodyParser.urlencoded({extended: true}))
-.post('/', add)
-.delete('id = req.params.id')
+app.post('/', upload.single('cover'), add)
+app.use(bodyParser.urlencoded({extended: true}))
+app.post('/', add)
+
+app.post ('/account', form)
+function form(req, res) {
+        res.render('account.pug',{data:data})
+}
+
+app.delete('id = req.params.id')
+
+
+
 
 function add(req, res){
+        var id = slug(req.body.title).toLowerCase()
         data.push({
+                id: id,
+                name: name,
+                email: req.body.email,
                 cover: req.file ? req.filename : null,
         })
-       
+       res.redirect('/' + id)
 }
 
 
@@ -63,6 +77,10 @@ function aanmelden(req, res) {
         res.render('aanmelden.pug');
 }
 
+app.get('/account', account)
+function account(req, res) {
+        res.render('account.pug', {data:data});
+}
 
 //-------------------- Route naar aboutme -------------------------
 app.get('/aboutme', aboutpage)

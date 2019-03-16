@@ -1,7 +1,7 @@
 var camelcase = require('camelcase');
 
-console.log(camelcase('hello-world'));
+//console.log(camelcase('hello-world'));
 
-var nodemon = require('nodemon');
+//var nodemon = require('nodemon');
 
-console.log(nodemon('hello-world'));
+//console.log(nodemon('hello-world'));
