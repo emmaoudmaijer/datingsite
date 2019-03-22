@@ -39,11 +39,6 @@ label {
    
         
 }
-input [type=text,email] {
-    width:55%;
-    margin-top:5px;
-  margin-left: 3em;
-}
 
 input [type=checkbox] {
   margin-left: 3em;
@@ -76,3 +71,7 @@ div {
     padding-top: 32px;
     width: 964px;
 }
+
+input [type=text,email] {
+   padding: 2em;
+} 

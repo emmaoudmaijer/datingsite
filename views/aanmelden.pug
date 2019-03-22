@@ -4,13 +4,11 @@ html
 style
      include ../static/style.css
 body
-
+<enctype=multipart/form-data>
  h1= 'Registreren'
- <enctype=multipart/form-data>
-
-div
-<form action=/account method=post>
-fieldset
+ div
+ <form action=/accounts method=post>
+ fieldset
      label(for='name') Naam: <br>
      <input name=name type=text accept=text/> <br>
      label(for='email') Email: <br>
@@ -22,3 +20,4 @@ fieldset
      label(for='image') Voeg een profielfoto toe: <br>
      <input name=profielfoto type=file accept=image/><br>
      button.btn.btn-primary(type='submit') Registreren
+ </form>

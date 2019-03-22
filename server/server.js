@@ -70,7 +70,7 @@ function aanmelden(req, res) {
 }
 
 app.get('/account', account)
-function aanmelden(req, res) {
+function account(req, res) {
         res.render('account.pug', {data:account});
 }
 

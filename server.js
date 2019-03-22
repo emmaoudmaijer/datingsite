@@ -6,6 +6,18 @@ var upload = multer({dest: 'static/upload/'});
 var slug = require('slug');
 var bodyParser = require('body-parser');
 
+//--------------- mongodb
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://emma.oudmaijer@hva.nl:emma.oudmaijer1@cluster0-cjez5.mongodb.net/Feliz?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("Feliz").collection("accounts");
+  // perform actions on the collection object
+  client.close();
+});
+
+
 
 //--------------- express
 
@@ -19,53 +31,22 @@ var data = [
      {
         id: 1,
         name: 'Emma Oudmaijer',
-        email: 'Emmaoudmaijer@hva.nl'
+        email: 'Emmaoudmaijer@hva.nl',
+        profielfoto: '',
      },
      {
         id: 2,
         name: 'Youp Schaefers',
-        email: 'youpschaefers@gmail.com'
+        email: 'youpschaefers@gmail.com',
+        profielfoto: '',
      }
 ]
-app.post('/', upload.single('cover'), add)
+
 app.use(bodyParser.urlencoded({extended: true}))
-app.post('/', add)
-
-app.post ('/account', form)
-function form(req, res) {
-        res.render('account.pug',{data:data})
-}
-
-app.delete('id = req.params.id')
-
-
-
-
-function add(req, res){
-        var id = slug(req.body.title).toLowerCase()
-        data.push({
-                id: id,
-                name: name,
-                email: req.body.email,
-                cover: req.file ? req.filename : null,
-        })
-       res.redirect('/' + id)
-}
-
-
-function remove(req, res) {
-        var id = req.params.id
-
-        data = data.filter(function (value){
-                return value.id !== id
-        })
-        res.json({status: 'ok'})
-}
-
 app.set('view engine', 'pug');
 app.use(express.static('/static'));
 
-//-------------------- Route naar homepage -------------------------
+//-------------------- website pages -------------------------
 
 app.get('/', homepage)
 function homepage(req, res) {
@@ -79,22 +60,37 @@ function aanmelden(req, res) {
 
 app.get('/account', account)
 function account(req, res) {
-        res.render('account.pug', {data:data});
+    res.render('account.pug', {data:data, 'accountid': req.param("aid")} );
 }
 
-//-------------------- Route naar aboutme -------------------------
+app.get('/accounts', accounts)
+function accounts(req, res) {
+        res.render('accounts.pug', {data:data});
+}
+
+app.post('/accounts', form)
+function form(req, res) {
+        var id = data.length+1
+        data.push({
+                id: id,
+                name: req.body.name,
+                email: req.body.email,
+                profielfoto: req.body.profielfoto
+        })
+        res.render('accounts.pug',{data:data})
+}
+
 app.get('/aboutme', aboutpage)
 function aboutpage(req, res) {
         res.render('about.pug');
 }
 
-//---------------------- route naar login --------------------------
 app.get('/login', login)
 function login(req, res) {
         res.render('login.pug');
 }
 
-//----------------------------- error ------------------------------
+//----------------- display custom 404 error message when page not found ---------------------
 app.use(function(req, res, next){
   res.status(404);
 // default to plain-text. send()
@@ -102,4 +98,3 @@ app.use(function(req, res, next){
 });
 
 app.listen(port);
-

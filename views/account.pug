@@ -1,21 +1,30 @@
 html
  head
-    title='Test pagina'
+    title='Account detail page'
 style
      include ../static/style.css
 body
- h1= 'Profielpagina'
- p
+ h1 Account details 
+ 
+ //p
     button
       id=js-remove
       data-id="<%= data.id %>"
       class=danger
       Remove
 
+ table
+      tr 
+         td ID
+         td #{data[accountid-1].id}
+      tr
+         td Name
+         td #{data[accountid-1].name} 
+      tr
+         td Email address
+         td #{data[accountid-1].email}
+      tr
+         Picture
+         td <img src=/upload/#{data[accountid-1].cover} />
 
- <% if (data.cover) { %>
- img
- alt
- src="/upload/<%= data.cover %>"
- 
- <% } %>
+ a(class='button' href='/accounts') Return to account list
