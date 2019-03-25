@@ -20,9 +20,8 @@ body
         th EMAIL
     -for(var i = 0; i < data.length; i++)
         tr 
-            td
-                a(href='/account?aid=' + data[i].id) #{data[i].id}
-            td #{data[i].name} 
+            td 
+                a(href='/account?id=' + data[i]._id) #{data[i].name}
             td #{data[i].email}
 
  a(class='button' href='/aanmelden') Add Account

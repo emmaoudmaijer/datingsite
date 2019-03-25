@@ -23,16 +23,17 @@ client.connect(err => {
 */
 //const dbName = 'mydatingwebsite';
 //const MongoClient = require('mongodb').MongoClient;
-//const ObjectId = require('mongodb').ObjectID;
+const ObjectId = require('mongodb').ObjectID;
 //const uri = "mongodb+srv://admin:emma.oudmaijer1!@Feliz-cjez5.mongodb.net/test?retryWrites=true";
 
 
-var data = [];
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT;
 const client = new MongoClient(uri, { useNewUrlParser: true });
-
-
+var collection = null;
+client.connect(err => {
+       collection = client.db(process.env.DB_NAME).collection("accounts");
+});
 
 //const client = new MongoClient(uri, { useNewUrlParser: true });
 /*
@@ -100,6 +101,7 @@ var app = express();
 
 var port = 8000;
 
+/*
 var data2 = [
      {
         id: 1,
@@ -114,6 +116,7 @@ var data2 = [
         profielfoto: '',
      }
 ]
+*/
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engine', 'pug');
@@ -133,32 +136,33 @@ function aanmelden(req, res) {
 
 app.get('/account', account)
 function account(req, res) {
-    res.render('account.pug', {data:data, 'accountid': req.param("aid")} );
+        var param = req.param("id");
+        collection.find({'_id':ObjectId(param)}).toArray(function(err, data) {  
+            if (err) throw err;
+            console.log(data);
+            res.render('account.pug', {data:data} ); 
+        });
+    
 }
 
 app.get('/accounts', accounts)
 function accounts(req, res) {
-        client.connect(err => {
-                var collection = client.db(process.env.DB_NAME).collection("accounts");
-                collection.find().toArray(function(err, data) {  
-                      if (err) throw err;
-                      //console.log(data);  
-                      res.render('accounts.pug', {data:data});
-                    });
+        collection.find().toArray(function(err, data) {  
+            if (err) throw err;
+            res.render('accounts.pug', {data:data}); 
         });
-        client.close();
 }
 
 app.post('/accounts', form)
 function form(req, res) {
-        var id = data.length+1
-        data.push({
-                id: id,
-                name: req.body.name,
-                email: req.body.email,
-                profielfoto: req.body.profielfoto
+
+        collection.insertOne({
+          name: req.body.name,
+          email: req.body.email,
+          profielfoto: req.body.profielfoto
         })
-        res.render('accounts.pug',{data:data})
+
+       res.redirect('/accounts');
 }
 
 app.get('/aboutme', aboutpage)
@@ -283,5 +287,6 @@ express()
       }
       
 
-app.listen(port);
+
 */
+app.listen(port);
