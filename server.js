@@ -1,13 +1,17 @@
+var find = require('array-find')
 var camelcase = require('camelcase');
-
 var multer = require('multer');
 var upload = multer({dest: 'static/upload/'});
+//var mongo = require('mongodb').MongoClient;
 
 var slug = require('slug');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+require('dotenv').config();
 
+var mongoose = require('mongoose');
 //--------------- mongodb
-
+/*
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://emma.oudmaijer@hva.nl:emma.oudmaijer1@cluster0-cjez5.mongodb.net/Feliz?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
@@ -16,8 +20,77 @@ client.connect(err => {
   // perform actions on the collection object
   client.close();
 });
+*/
+//const dbName = 'mydatingwebsite';
+//const MongoClient = require('mongodb').MongoClient;
+//const ObjectId = require('mongodb').ObjectID;
+//const uri = "mongodb+srv://admin:emma.oudmaijer1!@Feliz-cjez5.mongodb.net/test?retryWrites=true";
 
 
+var data = [];
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT;
+const client = new MongoClient(uri, { useNewUrlParser: true });
+
+
+
+//const client = new MongoClient(uri, { useNewUrlParser: true });
+/*
+mongo.MongoClient.connect(uri, { useNewUrlParser: true }, function (err, client) {
+        if (err) throw err;
+        db = client.db(process.env.DB_NAME);
+        //console.log(db);
+
+        db.collection('accounts').find().toArray(function(err, data) {  
+                if (err) throw err;
+                
+                //db.close();
+              });
+});
+*/
+
+/*
+client.connect(err => {
+    if (err) throw err;
+    db = client.db(process.env.DB_NAME);
+    //console.log(db);
+    db.collection('accounts').find().toArray(function(err, data) {  
+        if (err) throw err;
+        console.log(data);
+        //db.close();
+      });
+    //var data = [db.collection('accounts').find()];
+    /*
+    db.collection("accounts").findOne({id:2}, function(err, result) {
+        if (err) throw err;
+        console.log(result.name);
+        //db.close();
+      });
+    */
+    //console.log(data);
+    
+   //var data = result;
+   //console.log(data);
+//});
+
+
+/*
+var MongoClient = function(server, options);
+MongoClient.prototype.open
+MongoClient.prototype.close
+MongoClient.prototype.db
+MongoClient.connect(mongodb:[emmaoudmaijer:emma.oudmaijer1@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[Feliz][?options]])
+
+MongoClient = require('mongodb').MongoClient
+  , Server = require('mongodb').Server;
+
+var mongoClient = new MongoClient(new Server('localhost', 27019));
+mongoClient.open(function(err, mongoClient) {
+  var db1 = mongoClient.db("mydb");
+
+  mongoClient.close();
+});
+*/ 
 
 //--------------- express
 
@@ -27,7 +100,7 @@ var app = express();
 
 var port = 8000;
 
-var data = [
+var data2 = [
      {
         id: 1,
         name: 'Emma Oudmaijer',
@@ -65,7 +138,15 @@ function account(req, res) {
 
 app.get('/accounts', accounts)
 function accounts(req, res) {
-        res.render('accounts.pug', {data:data});
+        client.connect(err => {
+                var collection = client.db(process.env.DB_NAME).collection("accounts");
+                collection.find().toArray(function(err, data) {  
+                      if (err) throw err;
+                      //console.log(data);  
+                      res.render('accounts.pug', {data:data});
+                    });
+        });
+        client.close();
 }
 
 app.post('/accounts', form)
@@ -97,4 +178,110 @@ app.use(function(req, res, next){
   res.type('txt').send('404 NOT FOUND...');
 });
 
+/*
+express()
+ //.get('/log-out', logout)
+
+  .use(session({
+    resave: false,
+    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET
+  }))*/
+ /*
+  function signup(req, res, next) {
+      
+      function onhash(hash) {
+        function oninsert(err) {
+            if (err) {
+              next(err)
+            } else {
+              req.session.user = {username: username}
+              res.redirect('/')
+            }
+          }
+        }
+      }
+      
+      function login(req, res, next) {
+
+        function done(err, data) {
+      
+          function onverify(match) {
+            if (match) {
+              req.session.user = {username: user.username};
+              res.redirect('/')
+            } else {
+              res.status(401).send('Password incorrect')
+            }
+          }
+        }
+      }
+      
+      function form(req, res) {
+        if (req.session.user) {
+          res.render('add.ejs')
+        } else {
+          res.status(401).send('Credentials required')
+        }
+      }
+      
+      function add(req, res, next) {
+        if (!req.session.user) {
+          res.status(401).send('Credentials required')
+          return
+        }
+      
+      }
+      
+      function remove(req, res, next) {
+      
+        if (!req.session.user) {
+          res.status(401).send('Credentials required')
+          return
+        }
+      }
+
+      function movies(req, res, next) {
+        connection.query('SELECT * FROM movies', done)
+      
+        function done(err, data) {
+          if (err) {
+            next(err)
+          } else {
+            res.render('list.ejs', {
+              data: data,
+              user: req.session.user
+            })
+          }
+        }
+      }
+      
+      function movie(req, res, next) {
+      
+        function done(err, data) {
+          if (err) {
+            next(err)
+          } else if (data.length === 0) {
+            next()
+          } else {
+            res.render('detail.ejs', {
+              data: data[0],
+              user: req.session.user
+            })
+          }
+        }
+      }
+      
+      function logout(req, res, next) {
+        req.session.destroy(function (err) {
+          if (err) {
+            next(err)
+          } else {
+            res.redirect('/')
+          }
+        })
+      }
+      
+
 app.listen(port);
+*/

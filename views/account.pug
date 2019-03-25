@@ -16,15 +16,24 @@ body
  table
       tr 
          td ID
-         td #{data[accountid-1].id}
+         td #{data2[accountid-1].id}
       tr
          td Name
-         td #{data[accountid-1].name} 
+         td #{data2[accountid-1].name} 
       tr
          td Email address
-         td #{data[accountid-1].email}
+         td #{data2[accountid-1].email}
       tr
-         Picture
+         td Picture
          td <img src=/upload/#{data[accountid-1].cover} />
 
  a(class='button' href='/accounts') Return to account list
+
+   //if (user) {
+    Hello #{user.username} 
+    } else {
+    a href= "log-in" Log in
+   
+  
+    //if (user) 
+     a href=/log-out>Log out

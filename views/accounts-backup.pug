@@ -1,0 +1,52 @@
+html
+ head
+    title='Alle accounts'
+style
+     include ../static/style.css
+body
+ h1 Accounts
+ 
+ //p
+    button
+      id=js-remove
+      data-id="<%= data.id %>"
+      class=danger
+      Remove
+
+
+ //table
+    tr 
+        th ID
+        th NAME
+        th EMAIL
+    -for(var i = 0; i < data.length; i++)
+        tr 
+            td 
+                a(href='/account?aid=' + data[i].id) #{data[i].id}
+            td #{data[i].name} 
+            td #{data[i].email}
+ 
+ //table
+    tr 
+        th ID
+        th NAME
+        th EMAIL
+    -for(var i = 0; i < data.length; i++)
+        tr 
+            td 
+                a(href='/account?aid=' + data[i].id) #{data[i].id}
+            td #{data[i].name} 
+            td #{data[i].email}
+
+ table
+    tr 
+        th ID
+        th NAME
+        th EMAIL
+    -for(var i = 0; i < data.length; i++)
+        tr 
+            td #{data[i]}
+            td #{data[i]} 
+            td #{data[i]}
+
+ a(class='button' href='/aanmelden') Add Account

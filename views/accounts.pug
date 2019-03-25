@@ -5,7 +5,7 @@ style
      include ../static/style.css
 body
  h1 Accounts
- 
+ //if (user)
  //p
     button
       id=js-remove
@@ -14,14 +14,13 @@ body
       Remove
 
  table
-   
     tr 
         th ID
         th NAME
         th EMAIL
     -for(var i = 0; i < data.length; i++)
         tr 
-            td 
+            td
                 a(href='/account?aid=' + data[i].id) #{data[i].id}
             td #{data[i].name} 
             td #{data[i].email}
