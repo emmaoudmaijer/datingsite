@@ -1,1 +1,6 @@
-{}
+{"builds": [
+	      "builds": [
+    { "src": "style.css", "use": "@now/static" },
+    { "src": "index.pug", "use": "@now/view" }
+  ]
+  }
