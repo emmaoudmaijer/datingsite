@@ -20,6 +20,8 @@ a {
 }
 h1{
     color: black;
+    font-weight: 100;
+    font-family: sans-serif;
 }
 /*-----------------------header-----------------------*/
 @media only screen and (min-width: 53em) {
@@ -63,9 +65,12 @@ h1{
     padding: 0.8em;
   }
 
-  header.img {
+  header img {
     float: left;
-    padding-top: 0em;
+    padding-top: 3em;
+    width: 200px;
+    height: 70px;
+    margin-left: 4em;
   }
 
 }
@@ -95,7 +100,8 @@ h1{
     border-top-color: pink;
     font-size: 3.5em;
     margin-right: 0.1em;
-    margin-top: 1em;
+    margin-top: 1.94em;
+
   }
   header li:hover {
     border-top: 3px solid;
@@ -112,14 +118,16 @@ h1{
 
   header img {
     float: left;
-    padding-top: 0em;
-    width:100px;
-    height:25px;
+    padding-top: 3em;
+    width:120px;
+    height:30px;
+    margin-left: 2em;
 
   }
 
   header p{
     float :left;
+    position: absolute;
   }
 
 }
@@ -159,6 +167,7 @@ margin-bottom: 2em;
     width: 100%;
     background-image: url("images/homepage.jpg");
     border-bottom: 15px solid pink;
+    margin-top:-2em;
   }
 
   
@@ -173,13 +182,14 @@ margin-bottom: 2em;
   }
 
   h1 {
-    padding: 9em 0em 0em 2em;
+    padding: 6em 0em 2em 2em;
     text-transform: uppercase;
+    font-size: 3em;
     
   }
 
   input {
-    width: 100%;
+    width: 90%;
     
 
   }
@@ -201,12 +211,14 @@ form {
   font-size: 1em;
   border-radius: 1.1em;
   text-align: center;
+  margin-right: 20%;
+  margin-left: 10%;
 }
 fieldset{
-width:90%;
-padding:1em;
-margin: 3em;
+width:100%;
+padding:2em;
 background-color: rgba(255, 218, 224, 0.932);
+margin-bottom: 2em;
 }
 
 label{
@@ -216,7 +228,7 @@ label{
 }
 
 input {
-  width: 100%;
+  width: 90%;
   height: 3em;
 }
 
@@ -258,4 +270,18 @@ input[type="checkbox"] {
 
 legend {
   font-size: 1em;
+}
+
+.detailaccount {
+  background-color: aliceblue;
+}
+
+legend {
+  font-size: 2em;
+}
+
+h2 {
+  text-align: center;
+  padding-bottom: 1em;
+  padding-top: 1em;
 }

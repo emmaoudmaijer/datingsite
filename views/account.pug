@@ -5,9 +5,9 @@ style
      include ../static/style.css
      include head.pug
 body
- h2= 'Account details' 
-
- table
+  h2= 'Account details' 
+  .detailaccount
+   table
       tr 
          td ID
          td #{data[0]._id}
@@ -21,11 +21,21 @@ body
          td Picture
          td <img src=/upload/#{data[0].profielfoto} />
 
- a(class='button' href='/accounts') Return to account list
-
-
-
- //p
+   a.buttonreturn(href='/accounts') Return to account list
+   
+   section.stories
+      article
+        .article-container
+          .article-image-container
+            img.article-image(src='')
+          h2 #{data[0].name} 
+          p 
+           img(src='images/emma.jpg' alt='persoon')
+          p Email adres:  #{data[0].email}
+          p Hoi! Ik ben #{data[0].name}
+          
+   
+   //p
     button
       id=js-remove
       data-id="<%= data.id %>"
