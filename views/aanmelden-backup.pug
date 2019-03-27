@@ -1,0 +1,46 @@
+html
+ head
+    title='Formulier'
+style
+     include ../static/style.css
+     include head.pug
+body
+    h2= 'Registreren'
+        form(action='/accounts', method='post', enctype='multipart/form-data' )
+         <enctype='multipart/form-data'>
+            fieldset
+                legend Algemene gegevens
+                label(for='name') Naam: <br>
+                <input name=name type=text accept=text/> <br>
+                label(for='email') Email: <br>
+                <input name=email type=email accept=email/><br>
+                label(for='password') Wachtwoord: <br>
+                <input name='password' type=password accept=password/><br>
+                label(for='password2') Herhaal wachtwoord: <br>
+                <input name=password2 type=password accept=password/><br>
+                label(for='image') Voeg een profielfoto toe: <br>
+                <input name='profielfoto' type=file accept=image/><br>
+         button.btn.btn-primary(type='submit') Registreren
+         div.container
+            fieldset
+                legend Interesses
+                 label Wat zijn je interesses?
+                label
+                    img(src='images/pepper.jpg', width='500px', height='200px')
+                <input type='checkbox', name='date', value='sport')/> sporten/sportwedstrijd
+                label
+                    img(src='images/pepper.jpg', width='500px', height='200px')
+                <input type='checkbox', name='date', value='sport')/>films/serie
+                 label
+                    img(src='images/pepper.jpg', width='500px', height='200px')
+                <input type='checkbox', name='date', value='sport')/>Koken
+                 label
+                    img(src='images/pepper.jpg', width='500px', height='200px')
+                <input type='checkbox', name='date', value='sport')/>sporten/sportwedstrijd
+                 label
+                    img(src='images/pepper.jpg', width='500px', height='200px')
+                <input type='checkbox', name='date', value='sport'/>films/serie
+                 label
+                    img(src='images/pepper.jpg', width='500px', height='200px')
+                <input type='checkbox', name='date', value='sport'/> Koken
+        </form>

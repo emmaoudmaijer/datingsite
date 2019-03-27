@@ -3,25 +3,16 @@ html
     title='Alle accounts'
 style
      include ../static/style.css
+     include head.pug
 body
- h1 Accounts
- //if (user)
- //p
-    button
-      id=js-remove
-      data-id="<%= data.id %>"
-      class=danger
-      Remove
-
+ h2=  'Accounts'
  table
     tr 
         th ID
         th NAME
         th EMAIL
     -for(var i = 0; i < data.length; i++)
-        tr 
-            td 
+        ul 
+            li.accounts 
                 a(href='/account?id=' + data[i]._id) #{data[i].name}
-            td #{data[i].email}
-
- a(class='button' href='/aanmelden') Add Account
+                p #{data[i].email}

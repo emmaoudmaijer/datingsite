@@ -1,39 +1,31 @@
 var find = require('array-find')
 var camelcase = require('camelcase');
 var multer = require('multer');
-var upload = multer({dest: 'static/upload/'});
-//var mongo = require('mongodb').MongoClient;
-
-var slug = require('slug');
+var upload = multer({dest:'upload/'});
+//var slug = require('slug');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 require('dotenv').config();
 
-var mongoose = require('mongoose');
-//--------------- mongodb
-/*
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://emma.oudmaijer@hva.nl:emma.oudmaijer1@cluster0-cjez5.mongodb.net/Feliz?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("Feliz").collection("accounts");
-  // perform actions on the collection object
-  client.close();
-});
-*/
-//const dbName = 'mydatingwebsite';
-//const MongoClient = require('mongodb').MongoClient;
+
+
+//---------------- CONNECTION TO DATABASE -----------------
 const ObjectId = require('mongodb').ObjectID;
-//const uri = "mongodb+srv://admin:emma.oudmaijer1!@Feliz-cjez5.mongodb.net/test?retryWrites=true";
-
-
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT;
 const client = new MongoClient(uri, { useNewUrlParser: true });
+
+//---------------- GET DATABASE COLLECTIONS -----------------
+var collection2 = null;
 var collection = null;
 client.connect(err => {
        collection = client.db(process.env.DB_NAME).collection("accounts");
+       collection2 = client.db(process.env.DB_NAME).collection("gebruikers");
 });
+
+
+
+
 
 //const client = new MongoClient(uri, { useNewUrlParser: true });
 /*
@@ -118,49 +110,102 @@ var data2 = [
 ]
 */
 
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engine', 'pug');
-app.use(express.static('/static'));
+app.use(express.static('static'));
+//app.use(express.static('resources')); 
+app.use(session({
+  resave: false,
+  saveUninitialized: true,
+  secret: process.env.SESSION_SECRET
+}))
 
-//-------------------- website pages -------------------------
+//app.post('/account', form)
+//-------------------- WEBSITE PAGES -------------------------
+
+app.post('/loginverify', loginverify)
+function loginverify(req, res) {
+        var username = req.body.username;
+        var password = req.body.password;
+        //console.log(username);
+        //console.log(password);
+
+        collection.find({'name':username}).toArray(function(err, data) {  
+          if (err) throw err;
+
+          if(data.length>0 && data[0].wachtwoord == password){
+              req.session.user = {username: username};
+              //console.log(req.session);
+              res.redirect('/');
+          } else{
+               res.redirect('/login');
+          }
+          //console.log(data[0].wachtwoord);
+          //res.render('account.pug', {data:data} ); 
+      });
+}
+
 
 app.get('/', homepage)
 function homepage(req, res) {
-        res.render('index.pug');
+        
+        if(req.session.user){
+            res.render('index.pug', {'user': req.session.user});
+        } else{
+            res.render('index.pug', {'user': {'username':''} });
+        }
+        console.log(req.session.user);
 }
 
 app.get('/aanmelden', aanmelden)
 function aanmelden(req, res) {
-        res.render('aanmelden.pug');
+        res.render('aanmelden.pug', {'user': {'username':''} });
 }
 
 app.get('/account', account)
 function account(req, res) {
+
+    if(req.session.user){
         var param = req.param("id");
         collection.find({'_id':ObjectId(param)}).toArray(function(err, data) {  
             if (err) throw err;
-            console.log(data);
-            res.render('account.pug', {data:data} ); 
+            //console.log(data);
+            res.render('account.pug', {data:data,'user':req.session.user}); 
         });
-    
+    } else{
+        res.redirect('/login');
+    }
 }
 
 app.get('/accounts', accounts)
 function accounts(req, res) {
+        //console.log(process.env.SESSION_SECRET);
+        //console.log(req.session);
+    if(req.session.user){
         collection.find().toArray(function(err, data) {  
             if (err) throw err;
-            res.render('accounts.pug', {data:data}); 
+            res.render('accounts.pug', {data:data,'user':req.session.user}); 
         });
+    } else{
+        res.redirect('/login');
+    }
 }
 
 app.post('/accounts', form)
 function form(req, res) {
+ 
+        upload.single(JSON.stringify(req.body.profielfoto));
+        //console.log(JSON.stringify(req.body));
 
         collection.insertOne({
           name: req.body.name,
           email: req.body.email,
-          profielfoto: req.body.profielfoto
+          profielfoto: req.body.profielfoto,
+          wachtwoord: req.body.password
         })
+
+        req.session.user = {username: req.body.name};
 
        res.redirect('/accounts');
 }
@@ -172,7 +217,24 @@ function aboutpage(req, res) {
 
 app.get('/login', login)
 function login(req, res) {
-        res.render('login.pug');
+        //console.log(req.session.user);
+        if(req.session.user){
+            res.render('index.pug', {'user': req.session.user});
+        } else{
+             res.render('login.pug', {'user': {'username':''} });
+        }
+        
+}
+
+app.get('/logout', logout)
+function logout(req, res) {
+        req.session.destroy(function (err) {
+          if (err) {
+            next(err)
+          } else {
+            res.redirect('/')
+          }
+        })
 }
 
 //----------------- display custom 404 error message when page not found ---------------------
@@ -182,15 +244,9 @@ app.use(function(req, res, next){
   res.type('txt').send('404 NOT FOUND...');
 });
 
-/*
-express()
- //.get('/log-out', logout)
 
-  .use(session({
-    resave: false,
-    saveUninitialized: true,
-    secret: process.env.SESSION_SECRET
-  }))*/
+
+
  /*
   function signup(req, res, next) {
       
@@ -276,7 +332,7 @@ express()
         }
       }
       
-      function logout(req, res, next) {
+    function logout(req, res, next) {
         req.session.destroy(function (err) {
           if (err) {
             next(err)

@@ -1,58 +1,134 @@
-* { box-sizing: border-box }
+/*
+*  STYLESHEET VOOR BLOK TECH
+*  AUTEUR: EMMA OUDMAIJER
+*  LAATSTE AANPASSING: 29 MAART 2019
+BRONNEN: 
+* https://stackoverflow.com/questions/54815294/pug-able-to-access-a-nested-array-from-a-mongo-database-json
+* https://docs.mongodb.com/manual/reference/server-sessions/
+* https://stackoverflow.com/questions/16478552/convert-objectid-mongodb-to-string-in-javascript
+*/
 
 body{
-    background-color: darkred;
-    color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif
+    color:black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: white;
 }
+a {
+  float: right;
+  color: black;
 
+}
 h1{
-    color: white;
+    color: black;
 }
 /*-----------------------header-----------------------*/
+@media only screen and (min-width: 53em) {
 
-header li {
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
-  background-color: transparent;
-  padding: 0em;
-  margin: 0em;
-  margin-top: 1.6em;
-  border: 0px solid;
-  background-color: #31415f;
-  border-top: 3px solid;
-  border-top-color: #31415f;
-}
-header li:hover {
-  border-top: 3px solid;
-  border-top-color: #FAEA31;
-}
-header a {
-  text-decoration: none;
-  text-align: center;
-  color: white;
-  font-family: arial;
-  font-size: 0.5em;
-  padding: 0.8em;
+  .topmenu {
+    display: inline-block;
+    margin: 1.4em;
+  }
+
+  header {
+    background-color: rgb(250, 160, 175);
+    height: 9em;
+    display: flex;
+    flex-wrap: wrap;
+  }
+/*desktop*/
+
+  header li {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    background-color: transparent;
+    margin-top: 1.6em;
+    border: 0.1em lightpink;
+    background-color: pink;
+    border-top: 3px solid;
+    border-top-color: pink;
+    font-size: 2.5em;
+    margin-right: 0.1em;
+  }
+  header li:hover {
+    border-top: 3px solid;
+    border-top-color: palevioletred;
+  }
+  header a {
+   text-decoration: none;
+    text-align: center;
+    color: white;
+    font-family: arial;
+    font-size: 0.5em;
+    padding: 0.8em;
+  }
+
+  header.img {
+    float: left;
+    padding-top: 0em;
+  }
+
 }
 
-header {
-  background-color: pink;
-  height: 12em;
-  display: flex;
-  flex-wrap: wrap;
-  z-index: 1;
-}
+@media only screen and (max-width: 53em) {
+  .topmenu {
+    display: inline-block;
+    margin: 0.1em;
+  }
 
-img {
+  header {
+    background-color: rgb(250, 160, 175);
+    height: 9em;
+    display: flex;
+    flex-wrap: wrap;
+  }
+/*desktop*/
+
+  header li {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    background-color: transparent;
+    border: 0.1em lightpink;
+    background-color: pink;
+    border-top: 3px solid;
+    border-top-color: pink;
+    font-size: 3.5em;
+    margin-right: 0.1em;
+    margin-top: 1em;
+  }
+  header li:hover {
+    border-top: 3px solid;
+    border-top-color: palevioletred;
+  }
+  header a {
+   text-decoration: none;
+    text-align: center;
+    color: white;
+    font-family: arial;
+    font-size: 0.3em;
+    padding: 0.3em;
+  }
+
+  header img {
+    float: left;
+    padding-top: 0em;
+    width:100px;
+    height:25px;
+
+  }
+
+  header p{
+    float :left;
+  }
+
+}
+/*img {
     max-width: 100%;
     max-height: 15em;
-}
+}*/
 
-form {
-    text-align: center;
-}
+
 
 input {
 width: 100%;
@@ -66,9 +142,7 @@ margin-bottom: 2em;
 }
 
   
-  label {
-    text-align: left:
-  }
+ 
 
   button[type=submit] {
     background-color:rgb(8, 37, 167);
@@ -80,20 +154,15 @@ margin-bottom: 2em;
     
   }
 
-
-  div.home {
+  .home {
     height: 700px;
     width: 100%;
-    background-image: url("/images/pepper.jpg");
+    background-image: url("images/homepage.jpg");
     border-bottom: 15px solid pink;
   }
 
-  a {
-    float: right;
-    color: white;
-
-  }
-  a.meldaan {
+  
+  a.homebutton {
   float: left;
   padding: 0.8em 3em 0.8em 3em;
   border: 1px solid pink;
@@ -109,9 +178,84 @@ margin-bottom: 2em;
     
   }
 
-
   input {
     width: 100%;
     
 
   }
+
+tr {
+  padding-bottom: 2em;
+}
+
+li.accounts {
+  border: 2px solid black;
+  padding: 1em;
+  width: 60%;
+  height: 10em;
+  background-color: pink;
+  list-style: none;
+
+}
+form {
+  font-size: 1em;
+  border-radius: 1.1em;
+  text-align: center;
+}
+fieldset{
+width:90%;
+padding:1em;
+margin: 3em;
+background-color: rgba(255, 218, 224, 0.932);
+}
+
+label{
+  display: block;
+  margin-top:1em;
+  color:#535353;
+}
+
+input {
+  width: 100%;
+  height: 3em;
+}
+
+input:focus{
+outline: none;
+background-color: rgb(247, 119, 140);
+border:2px solid black;
+}
+
+input[type="submit"]:hover{
+  background-color: #c1f0f0;
+}
+
+input[type="submit"] {
+  margin: 0;
+  font-size: 1em;
+  background-color: #FAEA31;
+  color: #000555;
+  border-radius: 0.2em;
+  font-size: 1.2em;
+  width:10em;
+}
+
+input[type="checkbox"] {
+  width: 2em;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+
+ form div{
+  height:10em;
+  padding:1em;
+  text-align: center;
+  margin-bottom: 10em;
+
+}
+
+legend {
+  font-size: 1em;
+}

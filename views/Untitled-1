@@ -1,0 +1,40 @@
+     fieldset
+     label(for='name') Naam: <br>
+     <input name=name type=text accept=text/> <br>
+     label(for='email') Email: <br>
+     <input name=email type=email accept=email/><br>
+     label(for='password') Wachtwoord: <br>
+     <input name='password' type=password accept=password/><br>
+     label(for='password2') Herhaal wachtwoord: <br>
+     <input name=password2 type=password accept=password/><br>
+     label(for='image') Voeg een profielfoto toe: <br>
+     <input name='profielfoto' type=file accept=image/><br>
+     button.btn.btn-primary(type='submit') Registreren
+     </form>
+     legend Algemene gegevens
+                label(for='name') Naam:
+                input(name='name' type='text' accept='text/')
+                
+                label(for='email') Email: 
+                input(name='email' type='email' accept='email/')
+                
+                label(for='password') Wachtwoord: 
+                input(name='password' type='password' accept='password/')
+
+                label(for='password2') Herhaal wachtwoord: 
+                input(name='password2' type='password' accept='password/')
+
+                label(for='image') Voeg een profielfoto toe: 
+                input(name='profielfoto' type='file' accept='image/')
+
+                button.btn.btn-primary(type='submit') Registreren
+
+                 
+     //-  //if (user) {
+     //-   Hello #{user.username} 
+     //-      } else {
+     //-      a href= "log-in" Log in
+   
+  
+     //-      //if (user) 
+     //-       a href=/log-out>Log out

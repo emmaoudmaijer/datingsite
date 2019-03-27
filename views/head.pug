@@ -1,0 +1,19 @@
+html
+ head
+    title='Account detail page'
+style
+     include ../static/style.css
+body
+ header
+    img(src='images/logo.png' alt='logo')
+    nav
+      ul.topmenu
+        li
+          a(href='/') Home
+        li
+          a(href='/accounts') Verkennen
+        li
+          a(href='') Matches
+        li
+          a(href='/aboutme') Profiel 
+    p Ingelogd als: #{user.username}
