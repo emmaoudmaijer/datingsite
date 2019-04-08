@@ -6,7 +6,7 @@ style
      include head.pug
 body
     h2= 'Registreren'
-    form(action="/accounts" method="post")
+    form(action="/account/accounts" method="post")
             fieldset
                 legend Algemene gegevens
                 label(for='name') Naam:
@@ -24,11 +24,6 @@ body
                 label(for='password2') Herhaal wachtwoord: 
                 br
                 input(name='password2' type='password' accept='password')
-                br
-                label(for='image') Voeg een profielfoto toe: 
-                br
-                input(name='profielfoto' type='file' accept='image')
-                br
 
             
 

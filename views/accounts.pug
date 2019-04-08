@@ -14,5 +14,5 @@ body
     -for(var i = 0; i < data.length; i++)
         ul 
             li.accounts 
-                a(href='/account?id=' + data[i]._id) #{data[i].name}
+                a(href='/account/account?id=' + data[i]._id) #{data[i].name}
                 p #{data[i].email}

@@ -8,7 +8,7 @@ body
 div.home 
     h1= 'Welkom op Feliz'
     -if (user.username == '')
-            a.homebutton(href='/aanmelden') Maak een account aan
+            a.homebutton(href='/account/register') Maak een account aan
             a.homebutton(href='/login') Inloggen
     -else
-        a.homebutton(href='/logout') Uitloggen
+        a.homebutton(href='/login/logout') Uitloggen

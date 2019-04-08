@@ -5,15 +5,15 @@ style
      include ../static/style.css
 body
  header
-    img(src='images/feliz.png' alt='logo')
+    img(src='/images/feliz.png' alt='logo')
     nav
       ul.topmenu
         li
           a(href='/') Home
         li
-          a(href='/accounts') Verkennen
+          a(href='/account/accounts') Verkennen
         li
-          a(href='') Matches
+          a(href='/account/accounts') Matches
         li
           a(href='/aboutme') Profiel 
     p Ingelogd als: #{user.username}
