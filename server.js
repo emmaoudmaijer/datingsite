@@ -62,5 +62,4 @@ app.use(function(req, res, next){
   res.type('txt').send('404 NOT FOUND...');
 });
 
-app.listen(port);
-
+app.listen(process.env.PORT || port);
