@@ -8,49 +8,47 @@ const client = new MongoClient(uri, { useNewUrlParser: true });
 
 let collection = null;
 client.connect(err => {
-    collection = client.db(process.env.DB_NAME).collection("accounts");
+	collection = client.db(process.env.DB_NAME).collection('accounts');
 });
 
 router
 	.post('/loginverify', loginverify)
 	.get('/', login)
-  .get('/logout', logout);
+	.get('/logout', logout);
 
 function loginverify(req, res) {
-        let username = req.body.username;
-        let password = req.body.password;
-        collection.find({'name':username}).toArray(function(err, data) {  
-          if (err) throw err;
-          console.log('In callback')
+	let username = req.body.username;
+	let password = req.body.password;
+	collection.find({'name':username}).toArray(function(err, data) {  
+		if (err) throw err;
 
-          if(data.length > 0 && data[0].wachtwoord == password){
-              req.session.user = {username: username};
+		if(data.length > 0 && data[0].wachtwoord == password){
+			req.session.user = {username: username};
   
-              res.redirect('/');
-          } else{
-               res.redirect('/login');
-          }
-      });
-      console.log('i\'m at the end')
+			res.redirect('/');
+		} else{
+			res.redirect('/login');
+		}
+	});
 }
 
 function login(req, res) {
-        if(!req.session.user){
-          res.render('login.pug', {'user': {'username':''} });
-        } else{
-          res.render('index.pug', {'user': req.session.user});
-        }
+	if(!req.session.user){
+		res.render('login.pug', {'user': {'username':''} });
+	} else{
+		res.render('index.pug', {'user': req.session.user});
+	}
         
 }
 
-function logout(req, res) {
-        req.session.destroy(function (err) {
-          if (err) {
-            next(err)
-          } else {
-            res.redirect('/')
-          }
-        })
+function logout(req, res, next) {
+	req.session.destroy(function (err) {
+		if (err) {
+			next(err)
+		} else {
+			res.redirect('/')
+		}
+	})
 }
 
 module.exports = router;

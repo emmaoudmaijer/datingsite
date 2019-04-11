@@ -8,56 +8,56 @@ const ObjectId = require('mongodb').ObjectID;
 
 let collection = null;
 client.connect(err => {
-       collection = client.db(process.env.DB_NAME).collection("accounts");
+	collection = client.db(process.env.DB_NAME).collection('accounts');
 });
 
 
 router
-    .get('/register', aanmelden)
-    .get('/account', account)
-    .get('/accounts', accounts)
-    .post('/accounts', form);
+	.get('/register', aanmelden)
+	.get('/account', account)
+	.get('/accounts', accounts)
+	.post('/accounts', form);
 
 
 function aanmelden(req, res) {
-        res.render('aanmelden.pug', {'user': {'username':''} });
+	res.render('aanmelden.pug', {'user': {'username':''} });
 }
 
 function account(req, res) {
 
-    if(req.session.user){
-        var param = req.param("id");
-        collection.find({'_id':ObjectId(param)}).toArray(function(err, data) {  
-            if (err) throw err;
-            res.render('account.pug', {data:data,'user':req.session.user}); 
-        });
-    } else{
-        res.redirect('/login');
-    }
+	if(req.session.user){
+		let param = req.param('id');
+		collection.find({'_id':ObjectId(param)}).toArray(function(err, data) {  
+			if (err) throw err;
+			res.render('account.pug', {data:data,'user':req.session.user}); 
+		});
+	} else{
+		res.redirect('/login');
+	}
 }
 
 function accounts(req, res) {
-    if(req.session.user){
-        collection.find().toArray(function(err, data) {  
-            if (err) throw err;
-            res.render('accounts.pug', {data:data,'user':req.session.user}); 
-        });
-    } else{
-        res.redirect('/login');
-    }
+	if(req.session.user){
+		collection.find().toArray(function(err, data) {  
+			if (err) throw err;
+			res.render('accounts.pug', {data:data,'user':req.session.user}); 
+		});
+	} else{
+		res.redirect('/login');
+	}
 }
 
 function form(req, res) {
-        collection.insertOne({
-          name: req.body.name,
-          email: req.body.email,
-          profielfoto: req.body.profielfoto,
-          wachtwoord: req.body.password
-        })
+	collection.insertOne({
+		name: req.body.name,
+		email: req.body.email,
+		profielfoto: req.body.profielfoto,
+		wachtwoord: req.body.password
+	})
 
-        req.session.user = {username: req.body.name};
+	req.session.user = {username: req.body.name};
 
-       res.redirect('/account/accounts');
+	res.redirect('/account/accounts');
 }
 
 module.exports = router;

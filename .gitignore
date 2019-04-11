@@ -9,3 +9,5 @@ node_modules
 
 #Ignore _old-node_modules
 _old-node_modules
+
+.whitesource
