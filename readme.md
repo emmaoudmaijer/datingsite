@@ -5,6 +5,9 @@ This is my datingapp for project Tech. This is a project for my study communicat
 ### About Feliz
 Feliz is a dating site that matches you based on interests like sports, cooking, movies etc. When creating an account, you specify your preferences for what you would like to do on a date or, what you're looking in someone. After creating your account you will be matched based on these interests
 
+
+I worked out the feature Accounts. You can make an account on my app and you can login 
+
 ![screens](images/Schermen.png)
 
 ## Wiki
