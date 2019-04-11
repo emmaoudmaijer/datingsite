@@ -2,7 +2,11 @@
 
 This is my datingapp for project Tech. This is a project for my study communication and multimedia design. This is a 10 week project.
 
-![](images/Schermen.png)
+![screens](images/Schermen.png)
+
+## Wiki
+You can read my proces for my datingsite here including my research:
+[Wiki](https://github.com/emmaoudmaijer/datingsite/wiki)
 
 ## Installation
 
