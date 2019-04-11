@@ -1,6 +1,10 @@
 # Feliz
 
 This is my datingapp for project Tech. This is a project for my study communication and multimedia design. This is a 10 week project.
+[Project tech repository](https://github.com/cmda-bt/pt-course-18-19)
+
+Description
+>In Project Tech students build a dynamic prototype of a web application. In different roles you take a well-argued position on, among other things, the privacy and security aspects of the application. You'll also learn to navigate the command line, version control with Git & GitHub and make sure code style is consistent.
 
 ### About Feliz
 Feliz is a dating site that matches you based on interests like sports, cooking, movies etc. When creating an account, you specify your preferences for what you would like to do on a date or, what you're looking in someone. After creating your account you will be matched based on these interests
